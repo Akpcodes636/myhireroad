@@ -18,7 +18,7 @@ export default function WhoWeHelp() {
           {audiences.map((a, i) => (
             <div
               key={a.title}
-              className="group cursor-default bg-white p-5 transition-colors duration-200 hover:bg-[#1450F5] sm:p-6 lg:p-8 xl:p-10 2xl:p-12"
+              className="group cursor-default bg-white p-5 transition-colors duration-200 hover:bg-[#38BDF8] sm:p-6 lg:p-8 xl:p-10 2xl:p-12"
             >
               <span className="mb-3 block text-xs font-bold tracking-widest text-[#A1A2A4] transition-colors group-hover:text-white/40 sm:mb-4 sm:text-sm lg:mb-5 lg:text-base">
                 {String(i + 1).padStart(2, '0')}

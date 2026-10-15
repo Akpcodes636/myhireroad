@@ -7,7 +7,7 @@ export default function SectionLabel({ children, light = false }: SectionLabelPr
   return (
     <p
       className={`text-xs font-semibold uppercase tracking-[0.15em] mb-3 ${
-        light ? 'text-[#93aafa]' : 'text-[#1450F5]'
+        light ? 'text-[#38BDF8]' : 'text-[#38BDF8]'
       }`}
     >
       {children}

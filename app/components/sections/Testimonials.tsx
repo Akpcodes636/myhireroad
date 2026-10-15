@@ -41,7 +41,7 @@ export default function Testimonials() {
               <div className="flex flex-1 flex-col p-5 sm:p-6 lg:p-7 xl:p-8 2xl:p-9">
 
                 {/* Outcome */}
-                <div className="mb-4 self-start bg-[#E8EEFE] px-3 py-1.5 text-xs font-semibold leading-relaxed text-[#1450F5] sm:text-sm lg:mb-5 lg:px-4 lg:py-2 lg:text-base">
+                <div className="mb-4 self-start bg-[#E8EEFE] px-3 py-1.5 text-xs font-semibold leading-relaxed text-black sm:text-sm lg:mb-5 lg:px-4 lg:py-2 lg:text-base">
                   {t.outcome}
                 </div>
 
@@ -52,7 +52,7 @@ export default function Testimonials() {
 
                 {/* Client details */}
                 <div className="flex items-center gap-3 border-t border-[#E8EEFE] pt-4 sm:gap-4 sm:pt-5 lg:pt-6">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#1450F5] text-sm font-bold text-white sm:h-12 sm:w-12 lg:h-14 lg:w-14 lg:text-base xl:h-16 xl:w-16 xl:text-lg">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#38BDF8] text-sm font-bold text-white sm:h-12 sm:w-12 lg:h-14 lg:w-14 lg:text-base xl:h-16 xl:w-16 xl:text-lg">
                     {t.name[0]}
                   </div>
 

@@ -12,7 +12,7 @@ export default function RealChallenge() {
           <SectionLabel>The Real Challenge</SectionLabel>
 
           <h2
-            className="mb-5 text-3xl font-extrabold leading-tight tracking-tight text-[#0F1430]
+            className="mb-5 text-3xl font-extrabold  text-[#0F1430]
               sm:text-4xl
               md:text-5xl
               lg:text-5xl
@@ -44,7 +44,7 @@ export default function RealChallenge() {
             >
               <span
                 aria-hidden="true"
-                className="block text-4xl font-extrabold leading-none text-[#E8EEFE]
+                className="block text-4xl font-extrabold leading-none text-[#E0F2FE]
                   sm:text-5xl
                   lg:text-6xl
                   xl:text-7xl"

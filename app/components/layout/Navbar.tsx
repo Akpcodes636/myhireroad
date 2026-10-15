@@ -15,7 +15,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2">
 
             <span className="font-bold text-[#0F1430] text-lg lg:text-2xl tracking-tight" style={{ fontFamily: 'var(--font-poppins), sans-serif' }}>
-              My Hire Roads
+              MyHireRoads
             </span>
           </Link>
 

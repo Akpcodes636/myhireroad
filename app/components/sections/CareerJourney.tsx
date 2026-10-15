@@ -1,4 +1,4 @@
-
+import Image from 'next/image';
 import SectionLabel from '../ui/SectionLabel';
 import { journeySteps as steps } from '../../utils/content';
 
@@ -27,8 +27,9 @@ export default function CareerJourney() {
               lg:text-xl lg:leading-9
               xl:text-2xl xl:leading-10"
           >
-            When your applications aren&apos;t getting results, the right career strategy can
-            help you present your strengths with clarity and prepare for the next opportunity.
+            When your applications aren&apos;t getting results, the right career
+            strategy can help you present your strengths with clarity and prepare
+            for the next opportunity.
           </p>
         </div>
 
@@ -41,33 +42,30 @@ export default function CareerJourney() {
                 i % 2 === 1 ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              {/* Numbered accent panel */}
+              {/* Career journey image */}
               <div
-                className="relative flex min-h-44 w-full items-center justify-center
-                  overflow-hidden sm:min-h-56
+                className="group relative min-h-64 w-full overflow-hidden
+                  sm:min-h-80
                   lg:min-h-[340px] lg:w-2/5
                   xl:min-h-[400px]"
-                style={{ background: step.accentColor }}
               >
+                <Image
+                  src={step.image}
+                  alt={step.imageAlt}
+                  fill
+                  sizes="(max-width: 1023px) 100vw, 40vw"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+
+                {/* Gradient overlay for image depth and text readability */}
                 <div
                   aria-hidden="true"
-                  className="select-none p-6 text-center text-white/20
-                    sm:p-8 lg:p-10 xl:p-12"
-                >
-                  <span
-                    className="block text-7xl font-extrabold leading-none
-                      sm:text-8xl
-                      md:text-9xl
-                      lg:text-[120px]
-                      xl:text-[150px]
-                      2xl:text-[170px]"
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
+                  className="absolute inset-0 bg-gradient-to-t from-[#0F1430]/75 via-[#0F1430]/10 to-transparent"
+                />
 
-                <div className="absolute inset-0 flex items-end p-5 sm:p-7 lg:p-8 xl:p-10">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-white/70 sm:text-sm">
+                {/* Image step label */}
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 lg:p-8 xl:p-10">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-white sm:text-sm">
                     {step.step}
                   </span>
                 </div>
@@ -81,11 +79,15 @@ export default function CareerJourney() {
                   xl:p-14
                   2xl:p-16"
               >
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-[#1450F5]
-                  sm:mb-4 sm:text-sm lg:text-base">
+                {/* Step label */}
+                <p
+                  className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-[#38BDF8]
+                    sm:mb-4 sm:text-sm lg:text-base"
+                >
                   {step.step}
                 </p>
 
+                {/* Step heading */}
                 <h3
                   className="mb-3 text-xl font-bold leading-snug text-[#0F1430]
                     sm:text-2xl
@@ -95,6 +97,7 @@ export default function CareerJourney() {
                   {step.title}
                 </h3>
 
+                {/* Step description */}
                 <p
                   className="text-base leading-7 text-[#5F6061]
                     sm:text-lg sm:leading-8
@@ -107,16 +110,6 @@ export default function CareerJourney() {
             </article>
           ))}
         </div>
-
-        {/* Disclaimer */}
-        <p
-          className="mt-6 max-w-2xl text-xs leading-relaxed text-[#77797D]
-            sm:mt-8 sm:text-sm sm:leading-6
-            lg:mt-10 lg:text-base lg:leading-7"
-        >
-          Career support can strengthen your preparation and positioning, but no service can
-          guarantee a job offer.
-        </p>
       </div>
     </section>
   );

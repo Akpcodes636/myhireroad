@@ -22,7 +22,7 @@ export default function Footer() {
               
 
               <span className="text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl xl:text-3xl">
-                My Hire Roads
+                MyHireRoads
               </span>
             </Link>
 
