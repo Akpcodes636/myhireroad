@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import SectionLabel from "../ui/SectionLabel";
 
@@ -6,15 +5,21 @@ export default function Founder() {
   return (
     <section
       id="about"
-      className="overflow-hidden bg-[#0E1C49] py-14 sm:py-16 md:py-20 lg:py-28 xl:py-32"
+      className="relative overflow-hidden bg-[#061B55] py-14 sm:py-16 md:py-20 lg:py-28 xl:py-32"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Background orbs */}
+      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-0 h-[500px] w-[500px] rounded-full bg-[#0866E8]/10 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-[#0866E8]/8 blur-3xl" />
+
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
 
           {/* Founder portrait */}
           <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:mx-0 lg:max-w-none">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-[#1E3265] shadow-2xl sm:rounded-3xl">
+            {/* Glow behind image */}
+            <div aria-hidden="true" className="absolute -inset-4 rounded-3xl bg-[#0866E8]/20 blur-2xl" />
 
+            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 shadow-2xl sm:rounded-3xl">
               <Image
                 src="/images/founder.jpg"
                 alt="Katherine Fasanella, founder of My Hire Roads"
@@ -24,66 +29,49 @@ export default function Founder() {
                 className="object-cover object-center transition-transform duration-700 hover:scale-[1.03]"
               />
 
-              {/* Image overlay for text contrast */}
+              {/* Gradient overlay */}
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-[#0E1C49] via-[#0E1C49]/25 to-transparent"
+                className="absolute inset-0 bg-gradient-to-t from-[#061B55] via-[#061B55]/20 to-transparent"
               />
 
-              {/* Founder information */}
+              {/* Founder info */}
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 lg:p-8 xl:p-10">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#38BDF8] sm:text-sm">
-                  Founder
-                </p>
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#0866E8]/40 bg-[#0866E8]/15 px-3 py-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#93C5FD]">Founder</p>
+                </div>
 
-                <h3
-                  className="break-words text-2xl font-bold leading-tight text-white
-                    sm:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl"
-                >
+                <h3 className="break-words text-2xl font-bold leading-tight text-white sm:text-3xl xl:text-4xl">
                   Katherine Fasanella
                 </h3>
 
-                <p className="mt-2 text-sm leading-relaxed text-[#E0F2FE] sm:text-base lg:text-lg xl:text-xl">
+                <p className="mt-2 text-sm leading-relaxed text-[#94A3B8] sm:text-base">
                   Former Healthcare COO
                 </p>
 
-                <div className="mt-5 h-1 w-14 rounded-full bg-[#38BDF8] sm:mt-6" />
+                <div className="mt-4 h-0.5 w-12 rounded-full bg-[#0866E8]" />
               </div>
             </div>
 
-            {/* Decorative accent */}
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-3 -right-3 -z-10 h-24 w-24 rounded-br-3xl bg-[#38BDF8]/20 sm:-bottom-4 sm:-right-4 sm:h-32 sm:w-32"
-            />
-
-            <div
-              aria-hidden="true"
-              className="absolute left-0 top-8 h-16 w-1 rounded-r-full bg-[#38BDF8] sm:h-20 lg:h-24 xl:h-28"
-            />
+            {/* Corner accents */}
+            <div aria-hidden="true" className="absolute -bottom-3 -right-3 -z-10 h-24 w-24 rounded-br-3xl border-b-2 border-r-2 border-[#0866E8]/30 sm:-bottom-4 sm:-right-4" />
+            <div aria-hidden="true" className="absolute -top-3 -left-3 -z-10 h-16 w-16 rounded-tl-3xl border-l-2 border-t-2 border-[#0866E8]/20" />
           </div>
 
           {/* Founder content */}
           <div className="min-w-0 pt-0 lg:pt-2">
-            <SectionLabel light>
-              The Perspective Behind the Brand
-            </SectionLabel>
+            <SectionLabel light>About</SectionLabel>
 
-            <h2
-              className="mb-5 text-3xl font-extrabold leading-[1.08] tracking-tight text-white
-                sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
-            >
-              We&apos;ve been on the other side of the hiring process. That
-              changes everything.
+            <h2 className="mb-5 mt-4 text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl">
+              Meet Our Founder{" "}
+              <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
+                Katherine Fasanella,
+              </span>{" "}
+              BA, MHSA
             </h2>
 
-            <p
-              className="text-base leading-7 text-[#CBD5E1]
-                sm:text-lg sm:leading-8
-                lg:text-lg
-                xl:text-xl xl:leading-9
-                2xl:text-2xl 2xl:leading-10"
-            >
+            <p className="text-base leading-7 text-[#94A3B8] sm:text-lg sm:leading-8 lg:text-lg xl:text-xl xl:leading-9">
               Katherine Fasanella is an accomplished executive, entrepreneur,
               and career strategist with over 30 years of leadership experience
               spanning business operations, finance, technology, regulatory
@@ -99,20 +87,8 @@ export default function Founder() {
               opportunity.
             </p>
 
-            {/* Supporting statement */}
-            <div className="mt-8 flex items-start gap-4 border-l-2 border-[#38BDF8] pl-5 sm:mt-10">
-              <div>
-                <p className="text-base font-semibold leading-relaxed text-white sm:text-lg">
-                  Career strategy grounded in real leadership experience.
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-[#CBD5E1] sm:text-base">
-                  Helping you communicate your value with clarity and
-                  confidence.
-                </p>
-              </div>
-            </div>
+           
           </div>
-
         </div>
       </div>
     </section>

@@ -26,7 +26,7 @@ export default function Home() {
         <StrategicApproach />
         <Founder />
         <HowItWorks />
-        <WhoWeHelp />
+        {/* <WhoWeHelp /> */}
         {/* <VideoSection /> */}
         <Testimonials />
         <StartHere />

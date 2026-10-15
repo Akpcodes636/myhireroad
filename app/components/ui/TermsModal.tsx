@@ -303,18 +303,26 @@ function TermsModalContent({
           </div>
 
           {/* Acceptance */}
-          <div className="mt-7 rounded-xl border border-[#BAE6FD] bg-[#F0F9FF] p-4">
+          <div className="mt-7 rounded-xl border border-[#DCEBFF] bg-[#F4F8FF] p-4">
             <label className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
                 checked={accepted}
                 onChange={(event) => setAccepted(event.target.checked)}
-                className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-[#0284C7] focus:ring-2 focus:ring-[#38BDF8]"
+                className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-[#0866E8] focus:ring-2 focus:ring-[#0866E8]"
               />
 
-              <span className="text-sm leading-6 text-[#0E1C49]">
-                I have read and agree to the MyHireRoads Terms &amp;
-                Services.
+              <span className="text-sm leading-6 text-[#061B55]">
+                I have read and agree to the MyHireRoads{" "}
+                <a
+                  href="/terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[#0866E8] underline underline-offset-4 hover:text-[#0B3D91]"
+                >
+                  Terms &amp; Services
+                </a>
+                .
               </span>
             </label>
           </div>

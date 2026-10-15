@@ -5,11 +5,11 @@ export type FAQ = {
 
 export const faqs: FAQ[] = [
   {
-    q: "Why isn't my resume getting callbacks?",
+    q: "Why am I applying for jobs but not getting interviews?",
     a: 'Your experience may be strong, but your resume isn&apos;t telling the right story. Missing keywords, unclear achievements, or poor alignment with job requirements can hold you back. We help position your experience to get noticed.',
   },
   {
-    q: 'Are your resumes ATS-friendly?',
+    q: 'Are your resumes ATS-friendly and optimized for recruiters?',
     a: 'Every resume is professionally written with ATS-compatible formatting, targeted keywords, and measurable accomplishments to help you stand out to both recruiting systems and hiring managers.',
   },
   {

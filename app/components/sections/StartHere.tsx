@@ -32,16 +32,16 @@ const investmentOptions = [
 ];
 
 const inputClass =
-  "w-full min-w-0 rounded-lg border border-[#CBD5E1] bg-white px-4 py-3 text-sm text-[#0E1C49] outline-none transition placeholder:text-[#94A3B8] focus:border-[#0284C7] focus:ring-2 focus:ring-[#38BDF8]/30 sm:text-base";
+  "w-full min-w-0 rounded-xl border border-[#DCEBFF] bg-white px-4 py-3 text-sm text-[#061B55] outline-none transition placeholder:text-[#94A3B8] focus:border-[#0866E8] focus:ring-2 focus:ring-[#0866E8]/20 sm:text-base";
 
 const labelClass =
-  "mb-2 block text-sm font-semibold text-[#0E1C49] sm:text-base";
+  "mb-2 block text-sm font-semibold text-[#061B55] sm:text-base";
 
 type FormData = {
   name: string;
   email: string;
   phone: string;
-  service: string;
+  services: string[];
   targetRole: string;
   careerStage: string;
   country: string;
@@ -55,7 +55,7 @@ const initialFormData: FormData = {
   name: "",
   email: "",
   phone: "",
-  service: "",
+  services: [],
   targetRole: "",
   careerStage: "",
   country: "",
@@ -91,6 +91,8 @@ export default function StartHere() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (formData.services.length === 0) return;
+
     if (!termsAccepted) {
       setPendingSubmit(true);
       setShowTerms(true);
@@ -115,7 +117,7 @@ export default function StartHere() {
     <>
       <section
         id="start"
-        className="overflow-hidden bg-[#F8FAFC] py-14 sm:py-20 lg:py-28 xl:py-32"
+        className="overflow-hidden bg-[#F4F8FF] py-14 sm:py-20 lg:py-28 xl:py-32"
       >
         <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-20">
           <div className="grid grid-cols-1 items-start gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-20 2xl:gap-24">
@@ -123,12 +125,12 @@ export default function StartHere() {
             <div className="min-w-0 lg:sticky lg:top-24">
               <SectionLabel>Start Here</SectionLabel>
 
-              <h2 className="mb-5 mt-4 text-3xl font-extrabold leading-tight tracking-tight text-[#0E1C49] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
+              <h2 className="mb-5 mt-4 text-3xl font-extrabold leading-tight tracking-tight text-[#061B55] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
                 Let&apos;s understand your career goal before recommending a
                 service.
               </h2>
 
-              <p className="mb-8 max-w-2xl text-base leading-7 text-[#64748B] sm:text-lg sm:leading-8 lg:mb-10 lg:text-xl">
+              <p className="mb-8 max-w-2xl text-base leading-7 text-[#475569] sm:text-lg sm:leading-8 lg:mb-10 lg:text-xl">
                 Tell us where you are in your career, what you want to achieve,
                 and the support you need. We&apos;ll use these details to help
                 guide your next step.
@@ -137,19 +139,19 @@ export default function StartHere() {
               <div className="space-y-5 lg:space-y-6">
                 {bookingSteps.map((step, index) => (
                   <div key={step} className="flex items-start gap-4">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0E1C49] text-sm font-bold text-white sm:h-10 sm:w-10">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0866E8] text-sm font-bold text-white sm:h-10 sm:w-10">
                       {index + 1}
                     </div>
 
-                    <p className="pt-1 text-sm font-medium leading-6 text-[#0E1C49] sm:text-base sm:leading-7">
+                    <p className="pt-1 text-sm font-medium leading-6 text-[#061B55] sm:text-base sm:leading-7">
                       {step}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 rounded-xl border border-[#BAE6FD] bg-[#E0F2FE] p-4 sm:p-5">
-                <p className="text-sm font-bold text-[#0E1C49]">
+              <div className="mt-8 rounded-2xl border border-[#DCEBFF] bg-[#F4F8FF] p-4 sm:p-5">
+                <p className="text-sm font-bold text-[#061B55]">
                   Consultation commitment fee: $50
                 </p>
 
@@ -162,7 +164,7 @@ export default function StartHere() {
                 <button
                   type="button"
                   onClick={() => setShowTerms(true)}
-                  className="mt-3 text-sm font-bold text-[#0369A1] underline underline-offset-4 hover:text-[#0E1C49]"
+                  className="mt-3 text-sm font-bold text-[#0866E8] underline underline-offset-4 hover:text-[#0B3D91]"
                 >
                   Read Terms &amp; Services
                 </button>
@@ -170,10 +172,10 @@ export default function StartHere() {
             </div>
 
             {/* Qualification form */}
-            <div className="min-w-0 rounded-2xl border border-[#E2E8F0] bg-white p-4 shadow-sm sm:p-7 md:p-8 lg:p-8 xl:p-10 2xl:p-12">
+            <div className="min-w-0 rounded-2xl border border-[#DCEBFF] bg-white p-4 shadow-sm sm:p-7 md:p-8 lg:p-8 xl:p-10 2xl:p-12">
               {submitted ? (
                 <div className="py-12 text-center sm:py-16">
-                  <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E0F2FE] text-[#0284C7]">
+                  <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#0866E8]/10 text-[#0866E8]">
                     <svg
                       width="32"
                       height="32"
@@ -191,7 +193,7 @@ export default function StartHere() {
                     </svg>
                   </div>
 
-                  <h3 className="mb-3 text-2xl font-extrabold text-[#0E1C49]">
+                  <h3 className="mb-3 text-2xl font-extrabold text-[#061B55]">
                     Details received.
                   </h3>
 
@@ -203,8 +205,8 @@ export default function StartHere() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7">
-                  <div className="rounded-lg border border-[#BAE6FD] bg-[#F0F9FF] p-4">
-                    <p className="text-sm leading-6 text-[#0E1C49]">
+                  <div className="rounded-xl border border-[#DCEBFF] bg-[#F4F8FF] p-4">
+                    <p className="text-sm leading-6 text-[#061B55]">
                       <strong>Before you begin:</strong> Complete the fields
                       below. You&apos;ll be asked to review and accept our Terms
                       &amp; Services before submitting.
@@ -303,33 +305,44 @@ export default function StartHere() {
                   {/* 5. Service selection */}
                   <fieldset>
                     <legend className={labelClass}>
-                      5. What service are you interested in? *
+                      5. What services are you interested in? * (select all that apply)
                     </legend>
 
                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                      {services.map((service) => (
-                        <label
-                          key={service}
-                          className={`flex cursor-pointer items-start gap-3 rounded-lg border px-4 py-3 text-sm transition ${
-                            formData.service === service
-                              ? "border-[#0284C7] bg-[#E0F2FE] text-[#0E1C49]"
-                              : "border-[#E2E8F0] bg-white text-[#475569] hover:border-[#38BDF8]"
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="service"
-                            required
-                            value={service}
-                            checked={formData.service === service}
-                            onChange={() => setField("service", service)}
-                            className="mt-0.5 h-4 w-4 shrink-0 accent-[#0284C7]"
-                          />
+                      {services.map((service) => {
+                        const checked = formData.services.includes(service);
+                        return (
+                          <label
+                            key={service}
+                            className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 text-sm transition ${
+                              checked
+                                ? "border-[#0866E8] bg-[#F4F8FF] text-[#061B55]"
+                                : "border-[#DCEBFF] bg-white text-[#475569] hover:border-[#0866E8]"
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              name="services"
+                              value={service}
+                              checked={checked}
+                              onChange={() => {
+                                const next = checked
+                                  ? formData.services.filter((s) => s !== service)
+                                  : [...formData.services, service];
+                                setField("services", next);
+                              }}
+                              className="mt-0.5 h-4 w-4 shrink-0 accent-[#0866E8]"
+                            />
 
-                          <span>{service}</span>
-                        </label>
-                      ))}
+                            <span>{service}</span>
+                          </label>
+                        );
+                      })}
                     </div>
+
+                    {formData.services.length === 0 && (
+                      <p className="mt-2 text-xs text-[#475569]">Please select at least one service.</p>
+                    )}
                   </fieldset>
 
                   {/* 6. Target role */}
@@ -429,8 +442,8 @@ export default function StartHere() {
                           key={option}
                           className={`flex cursor-pointer items-start gap-3 rounded-lg border p-3 text-sm leading-6 transition ${
                             formData.investmentReady === option
-                              ? "border-[#0284C7] bg-[#F0F9FF] text-[#0E1C49]"
-                              : "border-[#E2E8F0] text-[#475569] hover:border-[#BAE6FD]"
+                              ? "border-[#0866E8] bg-[#F4F8FF] text-[#061B55]"
+                              : "border-[#DCEBFF] text-[#475569] hover:border-[#0866E8]"
                           }`}
                         >
                           <input
@@ -442,7 +455,7 @@ export default function StartHere() {
                             onChange={() =>
                               setField("investmentReady", option)
                             }
-                            className="mt-1 h-4 w-4 shrink-0 accent-[#0284C7]"
+                            className="mt-1 h-4 w-4 shrink-0 accent-[#0866E8]"
                           />
 
                           {option}
@@ -471,7 +484,7 @@ export default function StartHere() {
                   </div>
 
                   {/* Contact consent */}
-                  <div className="rounded-lg bg-[#F8FAFC] p-4">
+                  <div className="rounded-xl bg-[#F4F8FF] p-4">
                     <label className="flex cursor-pointer items-start gap-3">
                       <input
                         type="checkbox"
@@ -481,7 +494,7 @@ export default function StartHere() {
                         onChange={(event) =>
                           setField("consent", event.target.checked)
                         }
-                        className="mt-1 h-4 w-4 shrink-0 accent-[#0284C7]"
+                        className="mt-1 h-4 w-4 shrink-0 accent-[#0866E8]"
                       />
 
                       <span className="text-sm leading-6 text-[#475569]">
@@ -492,14 +505,14 @@ export default function StartHere() {
                   </div>
 
                   {/* Terms status */}
-                  <div className="rounded-lg border border-[#E2E8F0] p-4">
+                  <div className="rounded-xl border border-[#DCEBFF] p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
-                        <p className="text-sm font-bold text-[#0E1C49]">
+                        <p className="text-sm font-bold text-[#061B55]">
                           Terms &amp; Services
                         </p>
 
-                        <p className="mt-1 text-xs leading-5 text-[#64748B]">
+                        <p className="mt-1 text-xs leading-5 text-[#475569]">
                           {termsAccepted
                             ? "You've accepted the terms."
                             : "Review and accept the terms before submitting."}
@@ -509,7 +522,7 @@ export default function StartHere() {
                       <button
                         type="button"
                         onClick={() => setShowTerms(true)}
-                        className="self-start text-sm font-bold text-[#0369A1] underline underline-offset-4 hover:text-[#0E1C49] sm:self-auto"
+                        className="self-start text-sm font-bold text-[#0866E8] underline underline-offset-4 hover:text-[#0B3D91] sm:self-auto"
                       >
                         {termsAccepted ? "Review terms" : "Read terms"}
                       </button>

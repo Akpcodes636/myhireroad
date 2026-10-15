@@ -19,13 +19,13 @@ interface ButtonProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-[#38BDF8] text-[#0E1C49] border-2 border-[#38BDF8] hover:bg-[#7DD3FC] hover:border-[#7DD3FC] active:bg-[#0EA5E9] active:border-[#0EA5E9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2',
+    'rounded-xl bg-[#0866E8] text-white border-2 border-[#0866E8] hover:bg-[#0B3D91] hover:border-[#0B3D91] active:bg-[#061B55] active:border-[#061B55] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0866E8] focus-visible:ring-offset-2',
 
   secondary:
-    'bg-transparent text-[#0E1C49] border-2 border-[#0E1C49] hover:bg-[#E0F2FE] active:bg-[#BAE6FD] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2',
+    'rounded-xl bg-transparent text-[#061B55] border-2 border-[#DCEBFF] hover:bg-[#F4F8FF] hover:border-[#0866E8] active:bg-[#DCEBFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0866E8] focus-visible:ring-offset-2',
 
   ghost:
-    'bg-transparent text-[#0E1C49] border-2 border-transparent hover:bg-[#F8FAFC] active:bg-[#E0F2FE] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2',
+    'rounded-xl bg-transparent text-[#061B55] border-2 border-transparent hover:bg-[#F4F8FF] active:bg-[#DCEBFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0866E8] focus-visible:ring-offset-2',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

@@ -65,9 +65,9 @@ export default function CareerJourney() {
 
                 {/* Image step label */}
                 <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 lg:p-8 xl:p-10">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-white sm:text-sm">
+                  {/* <span className="text-xs font-semibold uppercase tracking-widest text-white sm:text-sm">
                     {step.step}
-                  </span>
+                  </span> */}
                 </div>
               </div>
 
