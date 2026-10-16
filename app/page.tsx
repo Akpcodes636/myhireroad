@@ -1,6 +1,7 @@
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
+import TermsModalAutoShow from './components/ui/TermsModalAutoShow';
 import RealChallenge from './components/sections/RealChallenge';
 import CareerJourney from './components/sections/CareerJourney';
 import Services from './components/sections/Services';
@@ -17,6 +18,7 @@ import Contact from './components/sections/Contact';
 export default function Home() {
   return (
     <>
+      <TermsModalAutoShow />
       <Navbar />
       <main>
         <Hero />
