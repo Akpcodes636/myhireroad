@@ -50,7 +50,7 @@ export default function Hero() {
               transition support and salary negotiation.
             </p>
 
-            <p>We work from Mid level executives to C-suite level executives</p>
+             <p className="mb-5 max-w-xl text-base leading-relaxed text-[#94A3B8] sm:text-lg">We work from Mid level executives to C-suite level executives</p>
 
             {/* CTAs */}
             <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
