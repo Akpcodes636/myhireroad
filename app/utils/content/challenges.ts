@@ -7,7 +7,7 @@ export const challenges = [
   {
     number: '02',
     title: 'Your application may be overlooked.',
-    body: 'Clear structure, relevant language and ATS-aware formatting help employers understand your fit.',
+    body: 'Clear structure, relevant language and ATS-aware formatting, Algorithm is not picking the right keywords to help employers understand your fit.',
   },
   {
     number: '03',

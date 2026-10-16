@@ -3,6 +3,9 @@ import SectionLabel from '../ui/SectionLabel';
 import YouTubeEmbed from '../ui/YouTubeEmbed';
 import { testimonials } from '../../utils/content';
 
+const BOOKING_URL =
+  'https://app.acuityscheduling.com/schedule.php?owner=36932701&appointmentType=category:Career%20Consultation';
+
 export default function Testimonials() {
   return (
     <section className="overflow-hidden bg-white py-14 sm:py-20 lg:py-28 xl:py-36">
@@ -71,6 +74,28 @@ export default function Testimonials() {
               </div>
             </article>
           ))}
+        </div>
+
+        {/* Booking CTA */}
+        <div className="mt-14 rounded-2xl border border-[#DCEBFF] bg-[#F4F8FF] p-8 text-center sm:mt-16 sm:p-10 lg:p-12">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.15em] text-[#0866E8]">
+            Ready to write your own story?
+          </p>
+          <h3 className="mb-4 text-2xl font-extrabold tracking-tight text-[#061B55] sm:text-3xl">
+            Book your career consultation today.
+          </h3>
+          <p className="mx-auto mb-8 max-w-xl text-base leading-7 text-[#475569] sm:text-lg">
+            Join the professionals who took the next step. Schedule your consultation and start
+            positioning yourself for the opportunity you deserve.
+          </p>
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-xl bg-[#0866E8] px-8 py-4 text-sm font-bold tracking-wide text-white shadow-md transition-all duration-200 hover:bg-[#0B3D91] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0866E8] sm:text-base"
+          >
+            Book Your Consultation →
+          </a>
         </div>
 
       </div>

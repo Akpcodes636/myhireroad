@@ -37,22 +37,24 @@ export default function Hero() {
               </p>
             </div>
 
-            <h1 className="mb-2 text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="mb-5 text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
               Your experience deserves to be seen by the{' '}
               <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
                 right employers.
               </span>
             </h1>
 
-            <p className="mb-2 max-w-xl text-base leading-relaxed text-[#94A3B8] sm:text-lg">
+            <p className="mb-5 max-w-xl text-base leading-relaxed text-[#94A3B8] sm:text-lg">
               My Hire Roads helps professionals position themselves for better career opportunities
               through strategic resume writing, LinkedIn optimization, interview coaching, career
               transition support and salary negotiation.
             </p>
 
+            <p>We work from Mid level executives to C-suite level executives</p>
+
             {/* CTAs */}
             <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
-              <Button href="#services" variant="primary" size="lg">
+              <Button href="#services" variant="primary" size="sm">
                 Explore Career Services
               </Button>
 

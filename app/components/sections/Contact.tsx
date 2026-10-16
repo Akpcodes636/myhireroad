@@ -102,7 +102,7 @@ export default function Contact() {
 
               {/* Feature list */}
               <div className="mb-8 space-y-3">
-                {['Personalized service recommendation', 'No commitment required', 'Response within 24 hours'].map((point) => (
+                {['Personalized service recommendation', 'Response within 24 hours'].map((point) => (
                   <div key={point} className="flex items-center gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0866E8]/20">
                       <svg viewBox="0 0 10 10" fill="none" className="h-3 w-3">

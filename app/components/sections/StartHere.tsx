@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import type { FormEvent } from "react";
 import SectionLabel from "../ui/SectionLabel";
 import Button from "../ui/Button";
 import TermsModal from "../ui/TermsModal";
 import { bookingSteps } from "../../utils/content";
+
+const BOOKING_URL =
+  "https://app.acuityscheduling.com/schedule.php?owner=36932701&appointmentType=category:Career%20Consultation";
 
 const services = [
   "Full Career Services Package",
@@ -31,11 +33,12 @@ const investmentOptions = [
   "I'm exploring my options.",
 ];
 
-const inputClass =
-  "w-full min-w-0 rounded-xl border border-[#DCEBFF] bg-white px-4 py-3 text-sm text-[#061B55] outline-none transition placeholder:text-[#94A3B8] focus:border-[#0866E8] focus:ring-2 focus:ring-[#0866E8]/20 sm:text-base";
+const baseInput =
+  "w-full min-w-0 rounded-xl border bg-white px-4 py-3 text-sm text-[#061B55] outline-none transition placeholder:text-[#94A3B8] focus:ring-2 sm:text-base";
+const okInput = `${baseInput} border-[#DCEBFF] focus:border-[#0866E8] focus:ring-[#0866E8]/20`;
+const errInput = `${baseInput} border-red-400 focus:border-red-500 focus:ring-red-400/20`;
 
-const labelClass =
-  "mb-2 block text-sm font-semibold text-[#061B55] sm:text-base";
+const labelClass = "mb-2 block text-sm font-semibold text-[#061B55] sm:text-base";
 
 type FormData = {
   name: string;
@@ -51,7 +54,9 @@ type FormData = {
   consent: boolean;
 };
 
-const initialFormData: FormData = {
+type Errors = Partial<Record<keyof FormData, string>>;
+
+const initial: FormData = {
   name: "",
   email: "",
   phone: "",
@@ -65,52 +70,104 @@ const initialFormData: FormData = {
   consent: false,
 };
 
+function FieldError({ msg }: { msg?: string }) {
+  if (!msg) return null;
+  return <p className="mt-1.5 text-xs text-red-500">{msg}</p>;
+}
+
 export default function StartHere() {
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<FormData>(initial);
   const [resume, setResume] = useState<File | null>(null);
+  const [resumeError, setResumeError] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [showTerms, setShowTerms] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [pendingSubmit, setPendingSubmit] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [errors, setErrors] = useState<Errors>({});
 
-  const setField = <K extends keyof FormData>(
-    key: K,
-    value: FormData[K],
-  ) => {
-    setFormData((previous) => ({
-      ...previous,
-      [key]: value,
-    }));
+  const setField = <K extends keyof FormData>(key: K, value: FormData[K]) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: undefined }));
   };
 
-  const closeTerms = () => {
-    setShowTerms(false);
-    setPendingSubmit(false);
+  const validate = (): boolean => {
+    const e: Errors = {};
+    if (!formData.name.trim()) e.name = "Full name is required.";
+    if (!formData.email.trim()) {
+      e.email = "Email address is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      e.email = "Please enter a valid email address.";
+    }
+    if (!formData.phone.trim()) e.phone = "Phone number is required.";
+    if (formData.services.length === 0)
+      e.services = "Please select at least one service.";
+    if (!formData.targetRole.trim()) e.targetRole = "Job title is required.";
+    if (!formData.careerStage) e.careerStage = "Please select your career stage.";
+    if (!formData.country.trim()) e.country = "Country is required.";
+    if (!formData.challenge.trim())
+      e.challenge = "Please describe your career challenge.";
+    if (!formData.investmentReady) e.investmentReady = "Please select an option.";
+    if (!formData.consent) e.consent = "You must agree to be contacted.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const doSubmit = async () => {
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      const fd = new FormData();
+      fd.append("name", formData.name);
+      fd.append("email", formData.email);
+      fd.append("phone", formData.phone);
+      fd.append("services", formData.services.join(", "));
+      fd.append("targetRole", formData.targetRole);
+      fd.append("careerStage", formData.careerStage);
+      fd.append("country", formData.country);
+      fd.append("challenge", formData.challenge);
+      fd.append("investmentReady", formData.investmentReady);
+      fd.append("additionalInfo", formData.additionalInfo);
+      fd.append("_hp", honeypot);
+      if (resume) fd.append("resume", resume);
+
+      const res = await fetch("/api/submit", { method: "POST", body: fd });
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "Something went wrong. Please try again or email us directly at myhireroads@gmail.com"
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleSubmit = (event: { preventDefault(): void }) => {
     event.preventDefault();
-
-    if (formData.services.length === 0) return;
-
+    if (!validate()) return;
     if (!termsAccepted) {
       setPendingSubmit(true);
       setShowTerms(true);
       return;
     }
-
-    // Frontend preview only: connect a backend or CRM before launch.
-    setSubmitted(true);
+    doSubmit();
   };
 
   const handleAcceptTerms = () => {
     setTermsAccepted(true);
     setShowTerms(false);
-
     if (pendingSubmit) {
       setPendingSubmit(false);
-      setSubmitted(true);
+      doSubmit();
     }
+  };
+
+  const closeTerms = () => {
+    setShowTerms(false);
+    setPendingSubmit(false);
   };
 
   return (
@@ -121,19 +178,18 @@ export default function StartHere() {
       >
         <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-20">
           <div className="grid grid-cols-1 items-start gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-20 2xl:gap-24">
+
             {/* Introduction */}
             <div className="min-w-0 lg:sticky lg:top-24">
               <SectionLabel>Start Here</SectionLabel>
 
               <h2 className="mb-5 mt-4 text-3xl font-extrabold leading-tight tracking-tight text-[#061B55] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
-                Let&apos;s understand your career goal before recommending a
-                service.
+                Let&apos;s understand your career goal before recommending a service.
               </h2>
 
               <p className="mb-8 max-w-2xl text-base leading-7 text-[#475569] sm:text-lg sm:leading-8 lg:mb-10 lg:text-xl">
-                Tell us where you are in your career, what you want to achieve,
-                and the support you need. We&apos;ll use these details to help
-                guide your next step.
+                Tell us where you are in your career, what you want to achieve, and the support you
+                need. We&apos;ll use these details to help guide your next step.
               </p>
 
               <div className="space-y-5 lg:space-y-6">
@@ -142,7 +198,6 @@ export default function StartHere() {
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0866E8] text-sm font-bold text-white sm:h-10 sm:w-10">
                       {index + 1}
                     </div>
-
                     <p className="pt-1 text-sm font-medium leading-6 text-[#061B55] sm:text-base sm:leading-7">
                       {step}
                     </p>
@@ -154,13 +209,10 @@ export default function StartHere() {
                 <p className="text-sm font-bold text-[#061B55]">
                   Consultation commitment fee: $50
                 </p>
-
-                <p className="mt-1 text-sm leading-6 text-[#475569]">
-                  The fee is credited toward your package if you proceed,
-                  refunded if you attend but decide not to continue, and subject
-                  to the cancellation policy.
+                <p className="mt-1 text-[18px] leading-6 text-[#475569]">
+                  The fee is credited toward your package if you proceed, refunded if you attend but
+                  decide not to continue, and subject to the cancellation policy.
                 </p>
-
                 <button
                   type="button"
                   onClick={() => setShowTerms(true)}
@@ -171,18 +223,13 @@ export default function StartHere() {
               </div>
             </div>
 
-            {/* Qualification form */}
+            {/* Form panel */}
             <div className="min-w-0 rounded-2xl border border-[#DCEBFF] bg-white p-4 shadow-sm sm:p-7 md:p-8 lg:p-8 xl:p-10 2xl:p-12">
               {submitted ? (
+                /* ── Success state ── */
                 <div className="py-12 text-center sm:py-16">
                   <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#0866E8]/10 text-[#0866E8]">
-                    <svg
-                      width="32"
-                      height="32"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
+                    <svg width="32" height="32" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                       <path
                         d="M5 13l4 4L19 7"
                         stroke="currentColor"
@@ -194,120 +241,136 @@ export default function StartHere() {
                   </div>
 
                   <h3 className="mb-3 text-2xl font-extrabold text-[#061B55]">
-                    Details received.
+                    We&apos;ve received your details!
                   </h3>
 
-                  <p className="mx-auto max-w-sm text-sm leading-7 text-[#64748B]">
-                    This is a frontend preview. Connect the form to your CRM or
-                    backend before launch. No information or resume has been
-                    transmitted.
+                  <p className="mx-auto mb-8 max-w-sm text-sm leading-7 text-[#64748B]">
+                    Check your inbox — we&apos;ve sent a confirmation email. Ready to take the next
+                    step? Book your consultation slot below.
+                  </p>
+
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-xl bg-[#0866E8] px-8 py-4 text-sm font-bold tracking-wide text-white shadow-md transition-all duration-200 hover:bg-[#0B3D91] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0866E8] sm:text-base"
+                  >
+                    Book Your Consultation →
+                  </a>
+
+                  <p className="mt-6 text-xs text-[#94A3B8]">
+                    Questions? Email us at{" "}
+                    <a
+                      href="mailto:myhireroads@gmail.com"
+                      className="underline hover:text-[#0866E8]"
+                    >
+                      myhireroads@gmail.com
+                    </a>
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7">
+                /* ── Form ── */
+                <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-7">
+                  {/* Honeypot — hidden from humans, bots will fill it */}
+                  <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
+                    <label htmlFor="_hp">Website</label>
+                    <input id="_hp" name="_hp" type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+                  </div>
+
                   <div className="rounded-xl border border-[#DCEBFF] bg-[#F4F8FF] p-4">
-                    <p className="text-sm leading-6 text-[#061B55]">
-                      <strong>Before you begin:</strong> Complete the fields
-                      below. You&apos;ll be asked to review and accept our Terms
-                      &amp; Services before submitting.
+                    <p className="text-[18px] leading-6 text-[#061B55]">
+                      <strong>Before you begin:</strong> Complete the fields below. You&apos;ll be
+                      asked to review and accept our Terms &amp; Services before submitting.
                     </p>
                   </div>
 
                   {/* 1. Full name */}
                   <div>
-                    <label htmlFor="name" className={labelClass}>
-                      1. Full name *
-                    </label>
-
+                    <label htmlFor="name" className={labelClass}>1. Full name *</label>
                     <input
                       id="name"
                       name="name"
                       autoComplete="name"
-                      required
-                      className={inputClass}
+                      className={errors.name ? errInput : okInput}
                       placeholder="Your full name"
                       value={formData.name}
-                      onChange={(event) => setField("name", event.target.value)}
+                      onChange={(e) => setField("name", e.target.value)}
                     />
+                    <FieldError msg={errors.name} />
                   </div>
 
                   {/* 2. Email */}
                   <div>
-                    <label htmlFor="email" className={labelClass}>
-                      2. Email address *
-                    </label>
-
+                    <label htmlFor="email" className={labelClass}>2. Email address *</label>
                     <input
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
-                      required
-                      className={inputClass}
+                      className={errors.email ? errInput : okInput}
                       placeholder="you@example.com"
                       value={formData.email}
-                      onChange={(event) =>
-                        setField("email", event.target.value)
-                      }
+                      onChange={(e) => setField("email", e.target.value)}
                     />
+                    <FieldError msg={errors.email} />
                   </div>
 
                   {/* 3. Phone */}
                   <div>
-                    <label htmlFor="phone" className={labelClass}>
-                      3. Phone number *
-                    </label>
-
+                    <label htmlFor="phone" className={labelClass}>3. Phone number *</label>
                     <input
                       id="phone"
                       name="phone"
                       type="tel"
                       autoComplete="tel"
-                      required
-                      className={inputClass}
+                      className={errors.phone ? errInput : okInput}
                       placeholder="Include your country code"
                       value={formData.phone}
-                      onChange={(event) =>
-                        setField("phone", event.target.value)
-                      }
+                      onChange={(e) => setField("phone", e.target.value)}
                     />
+                    <FieldError msg={errors.phone} />
                   </div>
 
-                  {/* 4. Optional resume */}
+                  {/* 4. Resume */}
                   <div>
                     <label htmlFor="resume" className={labelClass}>
                       4. Upload your current resume (optional)
                     </label>
-
                     <input
                       id="resume"
                       name="resume"
                       type="file"
                       accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                      className={`${inputClass} file:mr-3 file:rounded-md file:border-0 file:bg-[#E0F2FE] file:px-3 file:py-2 file:text-sm file:font-bold file:text-[#0E1C49]`}
-                      onChange={(event) =>
-                        setResume(event.target.files?.[0] ?? null)
-                      }
+                      className={`${resumeError ? errInput : okInput} file:mr-3 file:rounded-md file:border-0 file:bg-[#E0F2FE] file:px-3 file:py-2 file:text-sm file:font-bold file:text-[#0E1C49]`}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0] ?? null;
+                        if (file && file.size > 5 * 1024 * 1024) {
+                          setResumeError("File is too large. Maximum size is 5 MB.");
+                          setResume(null);
+                          e.target.value = "";
+                          return;
+                        }
+                        setResumeError("");
+                        setResume(file);
+                      }}
                     />
-
                     <p className="mt-2 text-xs leading-5 text-[#64748B]">
-                      PDF or Word document. Avoid uploading documents containing
+                      PDF or Word document, max 5 MB. Avoid uploading documents containing
                       information you do not wish to share.
                     </p>
-
-                    {resume && (
+                    {resumeError && <p className="mt-1.5 text-xs text-red-500">{resumeError}</p>}
+                    {resume && !resumeError && (
                       <p className="mt-2 break-all text-sm font-medium text-[#0369A1]">
                         Selected: {resume.name}
                       </p>
                     )}
                   </div>
 
-                  {/* 5. Service selection */}
+                  {/* 5. Services */}
                   <fieldset>
                     <legend className={labelClass}>
                       5. What services are you interested in? * (select all that apply)
                     </legend>
-
                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                       {services.map((service) => {
                         const checked = formData.services.includes(service);
@@ -317,6 +380,8 @@ export default function StartHere() {
                             className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 text-sm transition ${
                               checked
                                 ? "border-[#0866E8] bg-[#F4F8FF] text-[#061B55]"
+                                : errors.services
+                                ? "border-red-300 bg-white text-[#475569] hover:border-[#0866E8]"
                                 : "border-[#DCEBFF] bg-white text-[#475569] hover:border-[#0866E8]"
                             }`}
                           >
@@ -333,16 +398,12 @@ export default function StartHere() {
                               }}
                               className="mt-0.5 h-4 w-4 shrink-0 accent-[#0866E8]"
                             />
-
                             <span>{service}</span>
                           </label>
                         );
                       })}
                     </div>
-
-                    {formData.services.length === 0 && (
-                      <p className="mt-2 text-xs text-[#475569]">Please select at least one service.</p>
-                    )}
+                    <FieldError msg={errors.services} />
                   </fieldset>
 
                   {/* 6. Target role */}
@@ -350,18 +411,15 @@ export default function StartHere() {
                     <label htmlFor="targetRole" className={labelClass}>
                       6. Current or target job title *
                     </label>
-
                     <input
                       id="targetRole"
                       name="targetRole"
-                      required
-                      className={inputClass}
+                      className={errors.targetRole ? errInput : okInput}
                       placeholder="e.g. Product Manager, Finance Director"
                       value={formData.targetRole}
-                      onChange={(event) =>
-                        setField("targetRole", event.target.value)
-                      }
+                      onChange={(e) => setField("targetRole", e.target.value)}
                     />
+                    <FieldError msg={errors.targetRole} />
                   </div>
 
                   {/* 7. Career stage */}
@@ -369,45 +427,34 @@ export default function StartHere() {
                     <label htmlFor="careerStage" className={labelClass}>
                       7. Where are you in your career journey? *
                     </label>
-
                     <select
                       id="careerStage"
                       name="careerStage"
-                      required
-                      className={inputClass}
+                      className={errors.careerStage ? errInput : okInput}
                       value={formData.careerStage}
-                      onChange={(event) =>
-                        setField("careerStage", event.target.value)
-                      }
+                      onChange={(e) => setField("careerStage", e.target.value)}
                     >
                       <option value="">Select your current situation</option>
-
                       {careerStages.map((stage) => (
-                        <option key={stage} value={stage}>
-                          {stage}
-                        </option>
+                        <option key={stage} value={stage}>{stage}</option>
                       ))}
                     </select>
+                    <FieldError msg={errors.careerStage} />
                   </div>
 
                   {/* 8. Country */}
                   <div>
-                    <label htmlFor="country" className={labelClass}>
-                      8. Country *
-                    </label>
-
+                    <label htmlFor="country" className={labelClass}>8. Country *</label>
                     <input
                       id="country"
                       name="country"
                       autoComplete="country-name"
-                      required
-                      className={inputClass}
+                      className={errors.country ? errInput : okInput}
                       placeholder="Your country of residence"
                       value={formData.country}
-                      onChange={(event) =>
-                        setField("country", event.target.value)
-                      }
+                      onChange={(e) => setField("country", e.target.value)}
                     />
+                    <FieldError msg={errors.country} />
                   </div>
 
                   {/* 9. Career challenge */}
@@ -415,19 +462,16 @@ export default function StartHere() {
                     <label htmlFor="challenge" className={labelClass}>
                       9. What is your biggest career challenge? *
                     </label>
-
                     <textarea
                       id="challenge"
                       name="challenge"
-                      required
                       rows={4}
-                      className={`${inputClass} resize-y`}
+                      className={`${errors.challenge ? errInput : okInput} resize-y`}
                       placeholder="Tell us what you're finding difficult or what you'd like to improve."
                       value={formData.challenge}
-                      onChange={(event) =>
-                        setField("challenge", event.target.value)
-                      }
+                      onChange={(e) => setField("challenge", e.target.value)}
                     />
+                    <FieldError msg={errors.challenge} />
                   </div>
 
                   {/* 10. Investment readiness */}
@@ -435,7 +479,6 @@ export default function StartHere() {
                     <legend className={labelClass}>
                       10. Are you ready to invest in your career development? *
                     </legend>
-
                     <div className="space-y-2">
                       {investmentOptions.map((option) => (
                         <label
@@ -443,82 +486,74 @@ export default function StartHere() {
                           className={`flex cursor-pointer items-start gap-3 rounded-lg border p-3 text-sm leading-6 transition ${
                             formData.investmentReady === option
                               ? "border-[#0866E8] bg-[#F4F8FF] text-[#061B55]"
+                              : errors.investmentReady
+                              ? "border-red-300 text-[#475569] hover:border-[#0866E8]"
                               : "border-[#DCEBFF] text-[#475569] hover:border-[#0866E8]"
                           }`}
                         >
                           <input
                             type="radio"
                             name="investmentReady"
-                            required
                             value={option}
                             checked={formData.investmentReady === option}
-                            onChange={() =>
-                              setField("investmentReady", option)
-                            }
+                            onChange={() => setField("investmentReady", option)}
                             className="mt-1 h-4 w-4 shrink-0 accent-[#0866E8]"
                           />
-
                           {option}
                         </label>
                       ))}
                     </div>
+                    <FieldError msg={errors.investmentReady} />
                   </fieldset>
 
-                  {/* Additional information */}
+                  {/* Additional info */}
                   <div>
                     <label htmlFor="additionalInfo" className={labelClass}>
                       Anything else we should know? (Optional)
                     </label>
-
                     <textarea
                       id="additionalInfo"
                       name="additionalInfo"
                       rows={3}
-                      className={`${inputClass} resize-y`}
+                      className={`${okInput} resize-y`}
                       placeholder="Additional context or questions"
                       value={formData.additionalInfo}
-                      onChange={(event) =>
-                        setField("additionalInfo", event.target.value)
-                      }
+                      onChange={(e) => setField("additionalInfo", e.target.value)}
                     />
                   </div>
 
-                  {/* Contact consent */}
-                  <div className="rounded-xl bg-[#F4F8FF] p-4">
+                  {/* Consent */}
+                  <div
+                    className={`rounded-xl p-4 ${
+                      errors.consent ? "bg-red-50 ring-1 ring-red-300" : "bg-[#F4F8FF]"
+                    }`}
+                  >
                     <label className="flex cursor-pointer items-start gap-3">
                       <input
                         type="checkbox"
                         name="consent"
-                        required
                         checked={formData.consent}
-                        onChange={(event) =>
-                          setField("consent", event.target.checked)
-                        }
+                        onChange={(e) => setField("consent", e.target.checked)}
                         className="mt-1 h-4 w-4 shrink-0 accent-[#0866E8]"
                       />
-
                       <span className="text-sm leading-6 text-[#475569]">
-                        I agree that MyHireRoads may use these details to
-                        respond to my inquiry. *
+                        I agree that MyHireRoads may use these details to respond to my inquiry. *
                       </span>
                     </label>
+                    <FieldError msg={errors.consent} />
                   </div>
 
                   {/* Terms status */}
                   <div className="rounded-xl border border-[#DCEBFF] p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <div>
-                        <p className="text-sm font-bold text-[#061B55]">
-                          Terms &amp; Services
-                        </p>
-
+                        <p className="text-sm font-bold text-[#061B55]">Terms &amp; Services</p>
                         <p className="mt-1 text-xs leading-5 text-[#475569]">
                           {termsAccepted
                             ? "You've accepted the terms."
                             : "Review and accept the terms before submitting."}
                         </p>
                       </div>
-
                       <button
                         type="button"
                         onClick={() => setShowTerms(true)}
@@ -529,19 +564,22 @@ export default function StartHere() {
                     </div>
                   </div>
 
+                  {/* Submit error */}
+                  {submitError && (
+                    <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+                      <p className="text-sm text-red-600">{submitError}</p>
+                    </div>
+                  )}
+
                   <Button
                     type="submit"
                     variant="primary"
                     size="lg"
                     className="w-full justify-center"
+                    disabled={submitting}
                   >
-                    Review Terms &amp; Submit →
+                    {submitting ? "Submitting…" : "Review Terms & Submit →"}
                   </Button>
-
-                  <p className="text-xs leading-5 text-[#64748B]">
-                    Your information and resume are not transmitted by this
-                    frontend preview.
-                  </p>
                 </form>
               )}
             </div>
@@ -550,11 +588,7 @@ export default function StartHere() {
       </section>
 
       {showTerms && (
-        <TermsModal
-          open={showTerms}
-          onClose={closeTerms}
-          onAccept={handleAcceptTerms}
-        />
+        <TermsModal open={showTerms} onClose={closeTerms} onAccept={handleAcceptTerms} />
       )}
     </>
   );

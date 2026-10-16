@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import SectionLabel from '../ui/SectionLabel';
-import { journeySteps as steps } from '../../utils/content';
+import Image from "next/image";
+import SectionLabel from "../ui/SectionLabel";
+import { journeySteps as steps } from "../../utils/content";
 
 export default function CareerJourney() {
   return (
@@ -18,7 +18,8 @@ export default function CareerJourney() {
               xl:text-6xl
               2xl:text-7xl"
           >
-            From job-search frustration to the opportunity you want.
+            The real challenge; the problem is how your experience is positioned
+            and the right keywords
           </h2>
 
           <p
@@ -28,8 +29,8 @@ export default function CareerJourney() {
               xl:text-2xl xl:leading-10"
           >
             When your applications aren&apos;t getting results, the right career
-            strategy can help you present your strengths with clarity and prepare
-            for the next opportunity.
+            strategy can help you present your strengths with clarity and
+            prepare for the next opportunity.
           </p>
         </div>
 
@@ -39,7 +40,7 @@ export default function CareerJourney() {
             <article
               key={step.step ?? i}
               className={`flex flex-col overflow-hidden bg-white lg:flex-row ${
-                i % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                i % 2 === 1 ? "lg:flex-row-reverse" : ""
               }`}
             >
               {/* Career journey image */}
