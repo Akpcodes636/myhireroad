@@ -28,25 +28,7 @@ export default function FAQs() {
               and what to expect before taking the next step in your career.
             </p>
 
-            {/* Decorative accent card */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-[#DCEBFF] bg-[#F4F8FF] p-5 sm:mt-10">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#0866E8]/10">
-                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-[#0866E8]" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 16v-4M12 8h.01" />
-                </svg>
-              </div>
-              <p className="text-sm font-semibold text-[#061B55]">Still have questions?</p>
-              <p className="mt-1.5 text-sm leading-6 text-[#475569]">
-                Reach out directly and we&apos;ll help guide you to the right service.
-              </p>
-              <a
-                href="#contact"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0866E8] transition-colors hover:text-[#0B3D91]"
-              >
-                Contact us →
-              </a>
-            </div>
+           
           </div>
 
           {/* Right: Accordion */}

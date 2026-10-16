@@ -9,7 +9,7 @@ export const journeySteps = [
   {
     step: 'STEP 02 · THE SETBACK',
     title: "You reach an opportunity, but don't get the offer.",
-    body: 'Interviews require preparation. Practising relevant questions and structuring your examples can help you communicate your value more effectively.',
+    body: 'You are not only getting ghosted but the jobs do not exist We make use of the STAR method',
     image: '/images/offer.jpg',
     imageAlt: 'A professional reflecting after an interview in a modern office environment.',
   },
