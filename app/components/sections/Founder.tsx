@@ -117,9 +117,9 @@ export default function Founder() {
           <p className="mb-5 text-center text-sm font-semibold uppercase tracking-[0.15em] text-[#93C5FD]">
             Hear from Katherine
           </p>
-          {/* <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl sm:rounded-3xl">
+          <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl sm:rounded-3xl">
             <YouTubeEmbed videoId={founderVideoId} title="Katherine Fasanella — Founder Introduction" />
-          </div> */}
+          </div> 
         </div>
       </div>
     </section>

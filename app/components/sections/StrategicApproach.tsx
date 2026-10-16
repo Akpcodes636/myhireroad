@@ -58,7 +58,7 @@ export default function StrategicApproach() {
                     </svg>
                   </span>
 
-                  <span className="min-w-0">{p}</span>
+                  <span className="min-w-0 text-[16px] md:text-[18px]">{p}</span>
                 </li>
               ))}
             </ul>

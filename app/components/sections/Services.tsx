@@ -54,7 +54,7 @@ export default function Services() {
               />
 
               <h3
-                className={`relative mb-3 max-w-xs text-xl font-bold leading-snug sm:text-2xl ${
+                className={`relative mb-3 max-w-xs text-[16px] md:text-[18px] font-bold leading-snug lg:text-2xl ${
                   index === 1 ? "text-white" : "text-[#0E1C49]"
                 }`}
               >
@@ -62,7 +62,7 @@ export default function Services() {
               </h3>
 
               <p
-                className={`mb-4 text-sm font-semibold leading-relaxed ${
+                className={`mb-4 text-[16px] md:text-[18px] font-semibold leading-relaxed ${
                   index === 1 ? "text-[#38BDF8]" : "text-[#0284C7]"
                 }`}
               >
@@ -70,7 +70,7 @@ export default function Services() {
               </p>
 
               <p
-                className={`mb-6 text-sm leading-7 sm:text-base ${
+                className={`mb-6 text-[16px] md:text-[18px] leading-7 sm:text-base ${
                   index === 1 ? "text-[#D7E2F5]" : "text-[#64748B]"
                 }`}
               >
@@ -81,7 +81,7 @@ export default function Services() {
                 {service.bullets.map((bullet) => (
                   <li
                     key={bullet}
-                    className={`flex items-start gap-3 text-sm leading-6 ${
+                    className={`flex items-start gap-3 text-[17px] md:text-[16px] leading-6 ${
                       index === 1 ? "text-white/90" : "text-[#475569]"
                     }`}
                   >
