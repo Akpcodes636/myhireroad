@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { supabase } from '@/lib/supabase';
 
 const OWNER_EMAIL = process.env.GMAIL_USER ?? 'myhireroads@gmail.com';
 
@@ -41,6 +42,33 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
+
+    // ── Save to Supabase ─────────────────────────────────────────────
+    let resumePath: string | null = null;
+    if (resumeFile && resumeFile.size > 0) {
+      const ext = resumeFile.name.split('.').pop() ?? 'pdf';
+      const safeName = name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+      const filename = `${Date.now()}-${safeName}.${ext}`;
+      const buffer = Buffer.from(await resumeFile.arrayBuffer());
+      const { error: uploadError } = await supabase.storage
+        .from('resumes')
+        .upload(filename, buffer, { contentType: resumeFile.type || 'application/pdf' });
+      if (!uploadError) resumePath = filename;
+    }
+
+    await supabase.from('submissions').insert({
+      name,
+      email,
+      phone,
+      services,
+      target_role: targetRole,
+      career_stage: careerStage,
+      country,
+      challenge,
+      investment_ready: investmentReady,
+      additional_info: additionalInfo,
+      resume_path: resumePath,
+    });
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',

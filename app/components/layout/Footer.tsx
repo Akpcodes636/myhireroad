@@ -26,12 +26,6 @@ export default function Footer() {
               aria-label="My Hire Roads home"
               className="mb-6 inline-flex items-center gap-3"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0866E8]">
-                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5 text-white" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
-              </div>
               <span className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 MyHireRoads
               </span>
@@ -106,9 +100,9 @@ export default function Footer() {
             <Link href="/terms" className="text-xs text-white/40 transition-colors hover:text-white/80 sm:text-sm">
               Terms of Service
             </Link>
-            <Link href="#privacy" className="text-xs text-white/40 transition-colors hover:text-white/80 sm:text-sm">
+            {/* <Link href="#privacy" className="text-xs text-white/40 transition-colors hover:text-white/80 sm:text-sm">
               Privacy Policy
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

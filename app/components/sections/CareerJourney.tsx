@@ -7,7 +7,7 @@ export default function CareerJourney() {
     <section className="bg-[#F7F8F9] py-14 sm:py-16 md:py-20 lg:py-28 xl:py-32">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section introduction */}
-        <div className="mb-10 max-w-3xl sm:mb-12 lg:mb-16">
+        <div className="mb-10  sm:mb-12 lg:mb-16">
           <SectionLabel>Your Career Journey</SectionLabel>
 
           <h2
@@ -15,15 +15,15 @@ export default function CareerJourney() {
               sm:text-4xl
               md:text-5xl
               lg:text-5xl
-              xl:text-6xl
-              2xl:text-7xl"
+              xl:text-5xl
+              2xl:text-5xl text-center"
           >
-            The real challenge; the problem is how your experience is positioned
+            The real challenge, the problem is how your experience is positioned
             and the right keywords
           </h2>
 
           <p
-            className="max-w-3xl text-base leading-7 text-[#5F6061]
+            className="text-center max-w-[800px] mx-auto text-base leading-7 text-[#5F6061]
               sm:text-lg sm:leading-8
               lg:text-xl lg:leading-9
               xl:text-2xl xl:leading-10"
@@ -53,9 +53,9 @@ export default function CareerJourney() {
                 <Image
                   src={step.image}
                   alt={step.imageAlt}
-                  fill
-                  sizes="(max-width: 1023px) 100vw, 40vw"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  width={500}
+                  height={500}
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 w-full h-full"
                 />
 
                 {/* Gradient overlay for image depth and text readability */}

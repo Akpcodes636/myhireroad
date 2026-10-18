@@ -12,14 +12,14 @@ export default function Testimonials() {
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-20">
 
         {/* Section heading */}
-        <div className="mb-12 max-w-3xl sm:mb-14 lg:mb-16">
+        <div className="mb-12  sm:mb-14 lg:mb-16">
           <SectionLabel>Client Stories</SectionLabel>
 
-          <h2 className="mb-4 mt-4 text-3xl font-extrabold leading-tight tracking-tight text-[#061B55] sm:text-4xl md:text-5xl lg:mb-6 lg:text-5xl xl:text-6xl">
+          <h2 className="mb-4 mt-4 max-w-[800px] mx-auto text-center text-3xl font-extrabold leading-tight tracking-tight text-[#061B55] sm:text-4xl md:text-5xl lg:mb-6 lg:text-5xl xl:text-5xl">
             Professionals who made their next move.
           </h2>
 
-          <p className="max-w-2xl text-base leading-7 text-[#475569] sm:text-lg sm:leading-8 lg:text-xl lg:leading-9">
+          <p className="max-w-[600px] mx-auto text-center text-base leading-7 text-[#475569] sm:text-lg sm:leading-8 lg:text-xl lg:leading-9">
             Real career outcomes from professionals who strengthened their
             positioning and prepared for their next opportunity.
           </p>
@@ -29,7 +29,7 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3 xl:gap-8">
           {testimonials.map((t) => (
             <article
-              key={t.name}
+              key={t.videoId}
               className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#DCEBFF] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0866E8]/30 hover:shadow-[0_16px_40px_rgba(8,102,232,0.1)]"
             >
               {/* Top accent bar */}

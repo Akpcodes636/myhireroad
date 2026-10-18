@@ -8,18 +8,18 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="bg-[#F8FAFC] py-16 sm:py-20 lg:py-28 xl:py-32"
+      className="scroll-mt-20 bg-[#F8FAFC] py-16 sm:py-20 lg:py-28 xl:py-32"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
         {/* Section introduction */}
-        <div className="mb-12 max-w-3xl sm:mb-16">
+        <div className="mb-12 w-full sm:mb-16">
           <SectionLabel>Our Services</SectionLabel>
 
-          <h2 className="mb-5 text-3xl font-extrabold leading-tight tracking-tight text-[#0E1C49] sm:text-4xl md:text-5xl xl:text-6xl">
+          <h2 className="max-w-[800px] mx-auto mb-5 text-3xl font-extrabold leading-tight tracking-tight text-[#0E1C49] sm:text-4xl md:text-5xl xl:text-5xl text-center">
             Career support built around the move you want to make.
           </h2>
 
-          <p className="max-w-2xl text-base leading-7 text-[#64748B] sm:text-lg sm:leading-8">
+          <p className="max-w-[600px] mx-auto text-center text-base leading-7 text-[#64748B] sm:text-lg sm:leading-8">
             No generic one-size-fits-all advice. We focus on your experience,
             your goals and the roles you&apos;re targeting.
           </p>

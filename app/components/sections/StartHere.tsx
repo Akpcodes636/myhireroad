@@ -174,14 +174,14 @@ export default function StartHere() {
     <>
       <section
         id="start"
-        className="overflow-hidden bg-[#F4F8FF] py-14 sm:py-20 lg:py-28 xl:py-32"
+        className="scroll-mt-20 overflow-hidden bg-[#F4F8FF] py-14 sm:py-20 lg:py-28 xl:py-32"
       >
         <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-20">
           <div className="grid grid-cols-1 items-start gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-20 2xl:gap-24">
 
             {/* Introduction */}
             <div className="min-w-0 lg:sticky lg:top-24">
-              <SectionLabel>Start Here</SectionLabel>
+              <SectionLabel align="left">Start Here</SectionLabel>
 
               <h2 className="mb-5 mt-4 text-3xl font-extrabold leading-tight tracking-tight text-[#061B55] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl">
                 Let&apos;s understand your career goal before recommending a service.

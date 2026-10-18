@@ -6,24 +6,24 @@ import { challenges } from '../../utils/content';
 export default function RealChallenge() {
   return (
     <section className="bg-white py-14 sm:py-16 md:py-20 lg:py-28 xl:py-32">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
         {/* Section introduction */}
-        <div className="mb-10 max-w-3xl sm:mb-12 lg:mb-16">
+        <div className="mb-10 sm:mb-12 lg:mb-16">
           <SectionLabel>The Real Challenge</SectionLabel>
 
           <h2
-            className="mb-5 text-3xl font-extrabold  text-[#0F1430]
+            className="mb-5 text-3xl text-center font-extrabold  text-[#0F1430]
               sm:text-4xl
               md:text-5xl
               lg:text-5xl
-              xl:text-6xl
-              2xl:text-7xl"
+              xl:text-5xl
+              2xl:text-5xl"
           >
             You&apos;re qualified. So why aren&apos;t you getting the opportunities?
           </h2>
 
           <p
-            className="max-w-3xl text-base leading-7 text-[#5F6061]
+            className="text-center max-w-[800px] mx-auto text-base leading-7 text-[#5F6061]
               sm:text-lg sm:leading-8
               lg:text-xl lg:leading-9
               xl:text-2xl xl:leading-10"

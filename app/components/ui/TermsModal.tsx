@@ -41,7 +41,7 @@ export default function TermsModal({ open, onClose, onAccept }: TermsModalProps)
             </h3>
             <p>
               MyHireRoads offers career support services that may include resume
-              and CV writing, LinkedIn profile optimization, interview coaching,
+              writing, LinkedIn profile optimization, interview coaching,
               career transition support, professional positioning, and salary
               negotiation guidance.
             </p>

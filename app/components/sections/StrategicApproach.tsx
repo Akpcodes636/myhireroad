@@ -1,8 +1,7 @@
-
-import Image from 'next/image';
-import SectionLabel from '../ui/SectionLabel';
-import Button from '../ui/Button';
-import { strategicApproachPillars as pillars } from '../../utils/content';
+import Image from "next/image";
+import SectionLabel from "../ui/SectionLabel";
+import Button from "../ui/Button";
+import { strategicApproachPillars as pillars } from "../../utils/content";
 
 export default function StrategicApproach() {
   return (
@@ -11,13 +10,14 @@ export default function StrategicApproach() {
         <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           {/* Content */}
           <div className="min-w-0">
-            <SectionLabel>A Strategic Approach</SectionLabel>
+            <SectionLabel align="left">A Strategic Approach</SectionLabel>
 
             <h2
               className="mb-2 text-3xl font-extrabold leading-tight tracking-tight text-[#0E1C49]
-                sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+                sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl 2xl:text-5xl"
             >
-              We don&apos;t just rewrite documents. We help you reposition your story.
+              We don&apos;t just rewrite documents. We help you reposition your
+              story.
             </h2>
 
             <p
@@ -25,9 +25,12 @@ export default function StrategicApproach() {
                 sm:text-lg sm:leading-8 lg:mb-2 lg:text-lg
                 xl:text-xl xl:leading-9 2xl:text-2xl 2xl:leading-10"
             >
-              A strong application connects your experience to an employer&apos;s needs. That
-              means choosing the right evidence, communicating achievements clearly and presenting
-              a consistent story across your resume, LinkedIn profile and interview.
+              A strong resume should include the right keywords that align with
+              the job you&apos;re applying for while clearly highlighting your
+              relevant experience, skills, and achievements. Your resume,
+              LinkedIn profile, and interview responses should tell a
+              consistent, compelling story that shows employers why you&apos;re
+              the right candidate for the role.
             </p>
 
             {/* Strategic pillars */}
@@ -58,7 +61,9 @@ export default function StrategicApproach() {
                     </svg>
                   </span>
 
-                  <span className="min-w-0 text-[16px] md:text-[18px]">{p}</span>
+                  <span className="min-w-0 text-[16px] md:text-[18px]">
+                    {p}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -69,14 +74,14 @@ export default function StrategicApproach() {
           </div>
 
           {/* Professional career coaching image */}
-          <div className="relative mx-auto w-full max-w-2xl lg:max-w-none">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#E0F2FE] shadow-xl sm:rounded-3xl">
+          <div className="relative mx-auto w-full max-w-full lg:max-w-none">
+            <div className="relative  overflow-hidden rounded-2xl bg-[#E0F2FE] shadow-xl sm:rounded-3xl">
               <Image
                 src="/images/strag.jpg"
                 alt="A career consultant helping a professional review career documents and prepare for new opportunities"
-                fill
-                sizes="(max-width: 1023px) 100vw, 50vw"
-                className="object-cover object-center"
+                width={500}
+                height={500}
+                className="object-cover object-center w-full h-full"
               />
 
               {/* Subtle overlay for depth */}

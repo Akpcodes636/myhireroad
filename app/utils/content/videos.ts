@@ -39,18 +39,18 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     videoId: '--BHdcbcBnM',
-    name: 'Client Testimonial',
+    name: 'Katrina Garcia',
     role: 'Career Services Client',
     outcome: 'Career transformation with My Hire Roads',
     quote:
-      'Katherine completely reframed how I talked about my experience. I went from generic to compelling.',
+      'Working with Katherine was a great experience. Her cross-industry expertise and revamp of my resume and LinkedIn profile helped me land a job. Her practical career guidance and personalized support were invaluable. She’s knowledgeable, hands-on, and committed to her clients’ success. I highly recommend!',
   },
   {
     videoId: 'u24Hr6z8hbE',
-    name: 'Client Testimonial',
+    name: 'Derrick Hill',
     role: 'Career Services Client',
     outcome: 'Career transformation with My Hire Roads',
     quote:
-      "I had the skills but couldn't explain why they mattered. My Hire Roads helped me make that connection.",
+      "Kathy understood my background and created a clear roadmap for my career goals. Her compassion, patience, and genuine commitment made the experience feel like a  partnership. She strengthened my resume, optimized my LinkedIn profile, and improved my interview skills, leaving me more confident and prepared for my next career step.",
   },
 ];

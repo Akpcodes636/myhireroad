@@ -52,16 +52,16 @@ export default function Button({
     `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (href) {
-    if (external) {
+    if (external || href.startsWith('#')) {
       return (
         <a
           href={href}
           className={combinedStyles}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
           aria-disabled={disabled || undefined}
           tabIndex={disabled ? -1 : undefined}
-          onClick={disabled ? (event) => event.preventDefault() : undefined}
+          onClick={disabled ? (event) => event.preventDefault() : onClick}
         >
           {children}
         </a>
@@ -74,7 +74,7 @@ export default function Button({
         className={combinedStyles}
         aria-disabled={disabled || undefined}
         tabIndex={disabled ? -1 : undefined}
-        onClick={disabled ? (event) => event.preventDefault() : undefined}
+        onClick={disabled ? (event) => event.preventDefault() : onClick}
       >
         {children}
       </Link>

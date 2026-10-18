@@ -1,11 +1,20 @@
 interface SectionLabelProps {
   children: React.ReactNode;
   light?: boolean;
+  align?: 'left' | 'center';
 }
 
-export default function SectionLabel({ children, light = false }: SectionLabelProps) {
+export default function SectionLabel({
+  children,
+  light = false,
+  align = 'center',
+}: SectionLabelProps) {
   return (
-    <div className="mb-3 inline-flex">
+    <div
+      className={`mb-3 flex ${
+        align === 'center' ? 'justify-center' : 'justify-start'
+      }`}
+    >
       <span
         className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] ${
           light
@@ -13,7 +22,11 @@ export default function SectionLabel({ children, light = false }: SectionLabelPr
             : 'border border-[#DCEBFF] bg-[#F4F8FF] text-[#0866E8]'
         }`}
       >
-        <span className={`h-1.5 w-1.5 rounded-full ${light ? 'bg-[#60A5FA]' : 'bg-[#0866E8]'}`} />
+        <span
+          className={`h-1.5 w-1.5 rounded-full ${
+            light ? 'bg-[#60A5FA]' : 'bg-[#0866E8]'
+          }`}
+        />
         {children}
       </span>
     </div>

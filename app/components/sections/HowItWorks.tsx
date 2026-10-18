@@ -57,7 +57,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-[#F4F8FF] py-20 sm:py-24 lg:py-28"
+      className="scroll-mt-20 relative overflow-hidden bg-[#F4F8FF] py-20 sm:py-24 lg:py-28"
     >
       {/* Subtle background blobs */}
       <div aria-hidden="true" className="pointer-events-none absolute -right-48 top-0 h-96 w-96 rounded-full bg-[#0866E8]/5 blur-3xl" />

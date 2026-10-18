@@ -72,7 +72,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button href="#start" variant="primary" size="sm" className="self-start mt-2">
+            <Button href="#start" variant="primary" size="sm" className="self-start mt-2" onClick={() => setMobileOpen(false)}>
               Get Started
             </Button>
           </nav>

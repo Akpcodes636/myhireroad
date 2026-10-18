@@ -39,14 +39,14 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="overflow-hidden bg-[#F4F8FF] py-14 sm:py-20 lg:py-28 xl:py-36"
+      className="scroll-mt-20 overflow-hidden bg-[#F4F8FF] py-14 sm:py-20 lg:py-28 xl:py-36"
     >
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-20">
         <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-12 xl:gap-20 2xl:gap-24">
 
           {/* Left: Contact details */}
           <div className="min-w-0">
-            <SectionLabel>Contact</SectionLabel>
+            <SectionLabel align='left'>Contact</SectionLabel>
 
             <h2 className="mb-5 mt-4 text-3xl font-extrabold leading-tight tracking-tight text-[#061B55] sm:text-4xl md:text-5xl lg:mb-7 lg:text-5xl xl:text-6xl">
               Have a question before choosing a service?
