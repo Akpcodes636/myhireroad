@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import SubmissionsClient, { type Submission } from './SubmissionsClient';
 
+export const instant = false;
+
 export default async function AdminPage() {
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session');

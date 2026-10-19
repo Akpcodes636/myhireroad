@@ -87,6 +87,8 @@ export default function Hero() {
                 className="h-full w-full object-cover object-center"
                 width={600}
                 height={500}
+                loading="eager"
+                priority
               />
               <div
                 aria-hidden="true"

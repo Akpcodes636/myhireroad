@@ -39,10 +39,11 @@ export default function Footer() {
               href="mailto:myhireroads@gmail.com"
               className="inline-flex items-center gap-2 rounded-xl border border-[#0866E8]/30 bg-[#0866E8]/10 px-4 py-2.5 text-sm text-[#60A5FA] transition-all hover:border-[#0866E8]/60 hover:bg-[#0866E8]/20 hover:text-white sm:text-base"
             >
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <svg viewBox="0 0 24 24" fill="none" className="h-8 w-8 shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              myhireroads@gmail.com
+              myhireroads@gmail.com, <br />
+              kathyfasanella12@gmail.com
             </a>
           </div>
 

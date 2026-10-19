@@ -135,6 +135,35 @@ export default function StartHere() {
 
       const res = await fetch("/api/submit", { method: "POST", body: fd });
       if (!res.ok) throw new Error("Submission failed");
+
+      // ── Notify via Web3Forms (browser → Web3Forms directly) ─────────
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      if (accessKey) {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject:    `New Consultation Request — ${formData.name}`,
+            from_name:  "My Hire Roads Website",
+            replyto:    formData.email,
+            message: [
+              `Name:             ${formData.name}`,
+              `Email:            ${formData.email}`,
+              `Phone:            ${formData.phone}`,
+              `Services:         ${formData.services.join(", ")}`,
+              `Target Role:      ${formData.targetRole}`,
+              `Career Stage:     ${formData.careerStage}`,
+              `Country:          ${formData.country}`,
+              `Challenge:        ${formData.challenge}`,
+              `Investment Ready: ${formData.investmentReady}`,
+              `Additional Info:  ${formData.additionalInfo || "N/A"}`,
+              `Resume:           ${resume ? "Uploaded ✓" : "Not uploaded"}`,
+            ].join("\n"),
+          }),
+        });
+      }
+
       setSubmitted(true);
     } catch {
       setSubmitError(

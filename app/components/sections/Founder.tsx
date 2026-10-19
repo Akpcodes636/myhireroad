@@ -23,7 +23,7 @@ export default function Founder() {
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           {/* Founder portrait */}
-          <div className="relative mx-auto w-full max-w-sm sm:max-w-full lg:mx-0 lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-full sm:max-w-full lg:mx-0 lg:max-w-none">
             {/* Glow behind image */}
             <div
               aria-hidden="true"
