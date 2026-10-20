@@ -12,10 +12,10 @@ const contactItems = [
     label: "Email",
     content: (
       <a
-        href="mailto:myhireroads@gmail.com"
+        href="mailto:kathyfasanella12@gmail.com"
         className="break-words text-sm font-semibold text-[#061B55] transition-colors hover:text-[#0866E8] focus:outline-none sm:text-base lg:text-lg"
       >
-        myhireroads@gmail.com
+        kathyfasanella12@gmail.com
       </a>
     ),
   },
