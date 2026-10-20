@@ -16,12 +16,16 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.myhireroads.com"),
+  
   title: {
     default: "Career Services in Florida | MyHireRoads",
     template: "%s | My Hire Roads",
   },
   description:
     "Professional resume writing, LinkedIn profile optimization, interview coaching and career transition support for professionals pursuing opportunities in Florida.",
+    verification: {
+    google: "Md0_ExRpfdAACUyUHIX6nRjBE-CQnEuTwlg7_nujnbE",
+  },
   keywords: [
     "career services Florida",
     "resume writing Florida",
