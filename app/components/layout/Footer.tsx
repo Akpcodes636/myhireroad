@@ -93,12 +93,12 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex w-full max-w-[1600px] flex-col items-start gap-4 px-4 py-5 sm:px-6 sm:py-6 md:flex-row md:items-center md:justify-between lg:px-10 xl:px-16">
-          <p className="text-xs leading-6 text-white/30 sm:text-sm">
+          <p className="text-xs leading-6 text-white sm:text-sm">
             © 2026 My Hire Roads · kathyfasanella12@gmail.com
           </p>
 
           <div className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-6">
-            <Link href="/terms" className="text-xs text-white/40 transition-colors hover:text-white/80 sm:text-sm">
+            <Link href="/terms" className="text-xs text-white transition-colors hover:text-white/80 sm:text-sm">
               Terms of Service
             </Link>
             {/* <Link href="#privacy" className="text-xs text-white/40 transition-colors hover:text-white/80 sm:text-sm">

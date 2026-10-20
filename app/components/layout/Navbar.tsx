@@ -72,9 +72,15 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <div className='flex items-center gap-2'>
             <Button href="#start" variant="primary" size="sm" className="self-start mt-2" onClick={() => setMobileOpen(false)}>
               Get Started
             </Button>
+            <Button href="/terms" variant="primary" size="sm" className="self-start mt-2" onClick={() => setMobileOpen(false)}>
+              Terms and conditions
+            </Button>
+
+            </div>
           </nav>
         )}
       </div>
