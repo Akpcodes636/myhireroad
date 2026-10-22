@@ -64,9 +64,11 @@ function StatChip({ label, value, accent }: { label: string; value: number; acce
   );
 }
 
-export default function SubmissionsClient({ submissions }: { submissions: Submission[] }) {
+export default function SubmissionsClient({ submissions: initial }: { submissions: Submission[] }) {
+  const [submissions, setSubmissions] = useState<Submission[]>(initial);
   const [selected, setSelected] = useState<Submission | null>(null);
   const [search, setSearch] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   const today = useMemo(() => {
     const d = new Date();
@@ -86,6 +88,21 @@ export default function SubmissionsClient({ submissions }: { submissions: Submis
         s.target_role.toLowerCase().includes(q),
     );
   }, [submissions, search]);
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this submission? This cannot be undone.")) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/submissions/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      setSubmissions((prev) => prev.filter((s) => s.id !== id));
+      setSelected(null);
+    } catch {
+      alert("Failed to delete submission. Please try again.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-[#F8FAFF]" style={{ fontFamily: "var(--font-manrope, system-ui, sans-serif)" }}>
@@ -228,14 +245,27 @@ export default function SubmissionsClient({ submissions }: { submissions: Submis
                   <span className="rounded-full bg-[#EFF6FF] px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0866E8]">
                     Submission
                   </span>
-                  <button
-                    onClick={() => setSelected(null)}
-                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E2E8F0] text-[#94A3B8] transition hover:bg-[#F1F5F9] hover:text-[#475569]"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => handleDelete(selected.id)}
+                      disabled={deleting}
+                      className="flex items-center gap-1 rounded-lg border border-red-200 bg-red-50 px-2.5 py-1.5 text-[11px] font-semibold text-red-600 transition hover:border-red-400 hover:bg-red-100 disabled:opacity-50"
+                      title="Delete submission"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      {deleting ? "Deleting…" : "Delete"}
+                    </button>
+                    <button
+                      onClick={() => setSelected(null)}
+                      className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E2E8F0] text-[#94A3B8] transition hover:bg-[#F1F5F9] hover:text-[#475569]"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <Avatar name={selected.name} size={44} />

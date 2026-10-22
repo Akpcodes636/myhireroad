@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "My Hire Roads",
     title: "My Hire Roads | Strategic Career Services in Florida",
     description:
-      "Strategic resume writing, LinkedIn optimization, interview coaching, and salary negotiation for professionals ready to advance their careers. Serving Florida and the US.",
+      "Professional resume writing, LinkedIn optimization, interview coaching, and salary negotiation for professionals ready to advance their careers. Serving Florida and the US.",
     images: [
       {
         url: "/images/hero.jpg",

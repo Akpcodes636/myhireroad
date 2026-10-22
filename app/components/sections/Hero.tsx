@@ -33,7 +33,7 @@ export default function Hero() {
             {/* Badge */}
             <div className="mb-2 inline-flex items-center gap-2 rounded-full px-0 py-1.5">
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#93C5FD]">
-                Strategic Career Services in Florida
+             Resume Writing & Career Services in Florida
               </p>
             </div>
 

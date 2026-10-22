@@ -83,7 +83,6 @@ export default function StartHere() {
   const [showTerms, setShowTerms] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [pendingSubmit, setPendingSubmit] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [errors, setErrors] = useState<Errors>({});
@@ -136,162 +135,8 @@ export default function StartHere() {
       const res = await fetch("/api/submit", { method: "POST", body: fd });
       if (!res.ok) throw new Error("Submission failed");
 
-      // ── Notify via Web3Forms (browser → Web3Forms directly) ─────────
-      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-      if (accessKey) {
-        const submittedAt = new Date().toLocaleString("en-US", {
-          weekday: "long", year: "numeric", month: "long", day: "numeric",
-          hour: "2-digit", minute: "2-digit", timeZoneName: "short",
-        });
-
-        const row = (label: string, value: string) => `
-          <tr>
-            <td style="padding:10px 16px;background:#f8faff;border-bottom:1px solid #e2ecff;width:36%;font-size:13px;font-weight:600;color:#374151;white-space:nowrap;vertical-align:top;">
-              ${label}
-            </td>
-            <td style="padding:10px 16px;border-bottom:1px solid #e2ecff;font-size:14px;color:#1e3a6e;vertical-align:top;">
-              ${value}
-            </td>
-          </tr>`;
-
-        const htmlMessage = `
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /></head>
-<body style="margin:0;padding:0;background:#f0f4fb;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f4fb;padding:32px 16px;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
-
-        <!-- Header -->
-        <tr>
-          <td style="background:#0866E8;border-radius:12px 12px 0 0;padding:28px 32px;text-align:center;">
-            <p style="margin:0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">
-              My Hire Roads
-            </p>
-            <p style="margin:6px 0 0;font-size:13px;color:#bfdbfe;letter-spacing:0.4px;text-transform:uppercase;">
-              New Consultation Request
-            </p>
-          </td>
-        </tr>
-
-        <!-- Alert banner -->
-        <tr>
-          <td style="background:#1d4ed8;padding:12px 32px;text-align:center;">
-            <p style="margin:0;font-size:13px;color:#dbeafe;">
-              Submitted on <strong style="color:#ffffff;">${submittedAt}</strong>
-            </p>
-          </td>
-        </tr>
-
-        <!-- Body -->
-        <tr>
-          <td style="background:#ffffff;padding:28px 32px 8px;">
-            <p style="margin:0 0 20px;font-size:15px;color:#374151;line-height:1.6;">
-              A new prospect has completed the career intake form. Their details are below.
-              You can reply directly to this email to reach them.
-            </p>
-          </td>
-        </tr>
-
-        <!-- Contact Info section -->
-        <tr>
-          <td style="background:#ffffff;padding:0 32px 20px;">
-            <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6b7280;letter-spacing:0.8px;text-transform:uppercase;">
-              Contact Information
-            </p>
-            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2ecff;border-radius:8px;overflow:hidden;">
-              ${row("Full Name", formData.name)}
-              ${row("Email Address", `<a href="mailto:${formData.email}" style="color:#0866E8;text-decoration:none;">${formData.email}</a>`)}
-              ${row("Phone Number", formData.phone)}
-              ${row("Country", formData.country)}
-            </table>
-          </td>
-        </tr>
-
-        <!-- Career Profile section -->
-        <tr>
-          <td style="background:#ffffff;padding:0 32px 20px;">
-            <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6b7280;letter-spacing:0.8px;text-transform:uppercase;">
-              Career Profile
-            </p>
-            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2ecff;border-radius:8px;overflow:hidden;">
-              ${row("Target / Current Role", formData.targetRole)}
-              ${row("Career Stage", formData.careerStage)}
-              ${row("Services Requested", formData.services.join(" &bull; "))}
-              ${row("Investment Readiness", formData.investmentReady)}
-              ${row("Resume Attached", resume ? "&#10003; Uploaded" : "Not provided")}
-            </table>
-          </td>
-        </tr>
-
-        <!-- Career Challenge section -->
-        <tr>
-          <td style="background:#ffffff;padding:0 32px 20px;">
-            <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6b7280;letter-spacing:0.8px;text-transform:uppercase;">
-              Biggest Career Challenge
-            </p>
-            <div style="border:1px solid #e2ecff;border-radius:8px;padding:14px 16px;font-size:14px;color:#1e3a6e;line-height:1.7;white-space:pre-wrap;">
-              ${formData.challenge.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-            </div>
-          </td>
-        </tr>
-
-        ${formData.additionalInfo ? `
-        <!-- Additional Info section -->
-        <tr>
-          <td style="background:#ffffff;padding:0 32px 20px;">
-            <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#6b7280;letter-spacing:0.8px;text-transform:uppercase;">
-              Additional Information
-            </p>
-            <div style="border:1px solid #e2ecff;border-radius:8px;padding:14px 16px;font-size:14px;color:#1e3a6e;line-height:1.7;white-space:pre-wrap;">
-              ${formData.additionalInfo.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-            </div>
-          </td>
-        </tr>` : ""}
-
-        <!-- CTA -->
-        <tr>
-          <td style="background:#ffffff;padding:8px 32px 28px;text-align:center;">
-            <a href="mailto:${formData.email}"
-               style="display:inline-block;background:#0866E8;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:8px;letter-spacing:0.2px;">
-              Reply to ${formData.name.split(" ")[0]}
-            </a>
-          </td>
-        </tr>
-
-        <!-- Footer -->
-        <tr>
-          <td style="background:#f8faff;border-top:1px solid #e2ecff;border-radius:0 0 12px 12px;padding:16px 32px;text-align:center;">
-            <p style="margin:0;font-size:12px;color:#9ca3af;">
-              This notification was sent automatically from the My Hire Roads intake form.
-            </p>
-            <p style="margin:4px 0 0;font-size:12px;color:#9ca3af;">
-              &copy; ${new Date().getFullYear()} My Hire Roads &mdash; All rights reserved.
-            </p>
-          </td>
-        </tr>
-
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
-
-        await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            access_key: accessKey,
-            subject:    `New Consultation Request — ${formData.name}`,
-            from_name:  "My Hire Roads",
-            replyto:    formData.email,
-            message:    htmlMessage,
-          }),
-        });
-      }
-
-      setSubmitted(true);
+      // Web3Forms notification is sent server-side in /api/submit
+      window.location.href = BOOKING_URL;
     } catch {
       setSubmitError(
         "Something went wrong. Please try again or email us directly at kathyfasanella12@gmail.com"
@@ -381,52 +226,8 @@ export default function StartHere() {
 
             {/* Form panel */}
             <div className="min-w-0 rounded-2xl border border-[#DCEBFF] bg-white p-4 shadow-sm sm:p-7 md:p-8 lg:p-8 xl:p-10 2xl:p-12">
-              {submitted ? (
-                /* ── Success state ── */
-                <div className="py-12 text-center sm:py-16">
-                  <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#0866E8]/10 text-[#0866E8]">
-                    <svg width="32" height="32" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        d="M5 13l4 4L19 7"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-
-                  <h3 className="mb-3 text-2xl font-extrabold text-[#061B55]">
-                    We&apos;ve received your details!
-                  </h3>
-
-                  <p className="mx-auto mb-8 max-w-sm text-sm leading-7 text-[#64748B]">
-                    Check your inbox — we&apos;ve sent a confirmation email. Ready to take the next
-                    step? Book your consultation slot below.
-                  </p>
-
-                  <a
-                    href={BOOKING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-xl bg-[#0866E8] px-8 py-4 text-sm font-bold tracking-wide text-white shadow-md transition-all duration-200 hover:bg-[#0B3D91] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0866E8] sm:text-base"
-                  >
-                    Book Your Consultation →
-                  </a>
-
-                  <p className="mt-6 text-xs text-[#94A3B8]">
-                    Questions? Email us at{" "}
-                    <a
-                      href="mailto:kathyfasanella12@gmail.com"
-                      className="underline hover:text-[#0866E8]"
-                    >
-                      kathyfasanella12@gmail.com
-                    </a>
-                  </p>
-                </div>
-              ) : (
-                /* ── Form ── */
-                <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-7">
+              {/* ── Form ── */}
+              <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-7">
                   {/* Honeypot — hidden from humans, bots will fill it */}
                   <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
                     <label htmlFor="_hp">Website</label>
@@ -737,7 +538,6 @@ export default function StartHere() {
                     {submitting ? "Submitting…" : "Review Terms & Submit →"}
                   </Button>
                 </form>
-              )}
             </div>
           </div>
         </div>

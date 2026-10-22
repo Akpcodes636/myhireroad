@@ -1,8 +1,8 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+
+const baseUrl = "https://www.myhireroad.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.myhireroads.com";
-
   return [
     {
       url: baseUrl,
