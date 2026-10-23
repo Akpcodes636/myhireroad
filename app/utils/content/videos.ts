@@ -5,7 +5,8 @@ export type Video = {
   featured: boolean;
 };
 
-export const founderVideoId = 'bW3UiBnULDM';
+export const founderVideoId = '2zjo2-oS338';
+// https://youtu.be/2zjo2-oS338?si=mB_HCNQup4avgPsx
 
 export const careerInsightVideos: Video[] = [
   {

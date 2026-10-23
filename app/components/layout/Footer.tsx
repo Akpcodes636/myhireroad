@@ -36,14 +36,14 @@ export default function Footer() {
             </p>
 
             <a
-              href="mailto:kathyfasanella12@gmail.com"
+              href="mailto:Katefasanella12@gmail.com"
               className="inline-flex items-center gap-2 rounded-xl border border-[#0866E8]/30 bg-[#0866E8]/10 px-4 py-2.5 text-sm text-[#60A5FA] transition-all hover:border-[#0866E8]/60 hover:bg-[#0866E8]/20 hover:text-white sm:text-base"
             >
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
              
-              kathyfasanella12@gmail.com
+              Katefasanella12@gmail.com
             </a>
           </div>
 
@@ -94,7 +94,7 @@ export default function Footer() {
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex w-full max-w-[1600px] flex-col items-start gap-4 px-4 py-5 sm:px-6 sm:py-6 md:flex-row md:items-center md:justify-between lg:px-10 xl:px-16">
           <p className="text-xs leading-6 text-white sm:text-sm">
-            © 2026 My Hire Roads · kathyfasanella12@gmail.com
+            © 2026 My Hire Roads · Katefasanella12@gmail.com
           </p>
 
           <div className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-6">

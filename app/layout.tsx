@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.myhireroads.com"),
   
   title: {
-    default: "Career Services in Florida | MyHireRoads",
+    default: "Professional Resume Services | MyHireRoads",
     template: "%s | My Hire Roads",
   },
   description:
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
       "Professional resume writing, LinkedIn optimization, interview coaching, and salary negotiation for professionals ready to advance their careers. Serving Florida and the US.",
     images: [
       {
-        url: "/images/hero.jpg",
+        url: "/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "My Hire Roads — Strategic Career Services in Florida",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "My Hire Roads | Strategic Career Services in Florida",
     description:
       "Strategic resume writing, LinkedIn optimization, interview coaching, and salary negotiation for professionals ready to advance.",
-    images: ["/images/hero.jpg"],
+    images: ["/images/logo.jpg"],
   },
   robots: {
     index: true,

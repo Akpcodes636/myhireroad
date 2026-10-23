@@ -162,10 +162,10 @@ const sections = [
       <p>
         For questions, bookings, or cancellations, contact us at{" "}
         <a
-          href="mailto:kathyfasanella12@gmail.com"
+          href="mailto:Katefasanella12@gmail.com"
           className="font-semibold text-[#0866E8] underline underline-offset-4 transition-colors hover:text-[#0B3D91]"
         >
-           kathyfasanella12@gmail.com
+           Katefasanella12@gmail.com
         </a>
         .
       </p>
@@ -256,7 +256,7 @@ export default function TermsPage() {
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <a
-                  href="mailto:kathyfasanella12@gmail.com"
+                  href="mailto:Katefasanella12@gmail.com"
                   className="inline-flex items-center gap-2 rounded-xl bg-[#0866E8] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0B3D91]"
                 >
                   Contact us
