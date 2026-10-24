@@ -55,13 +55,13 @@ export default function TermsModal({ open, onClose, onAccept }: TermsModalProps)
             <h3 className="mb-2 text-base font-semibold text-[#0E1C49]">
               2. Consultation Booking &amp; $50 Commitment Fee
             </h3>
-            <p className="font-bold text-2xl">
+            <p className="font-bold text-base">
               A $50 commitment fee may be required to secure a consultation or
               begin the agreed booking process. Where explicitly communicated as
               refundable, the fee will be handled according to the refund
               conditions explained to the client before payment.
             </p>
-            <p className="mt-2 font-bold text-2xl">
+            <p className="mt-2 font-bold text-base">
               This fee is separate from the price of any career service unless
               otherwise agreed in writing. Clients should confirm the applicable
               payment and refund conditions before completing a transaction.
