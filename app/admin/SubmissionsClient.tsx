@@ -120,6 +120,12 @@ export default function SubmissionsClient({ submissions: initial }: { submission
         </div>
 
         <div className="flex items-center gap-3">
+          <a
+            href="/admin/blog"
+            className="mr-2 rounded-xl bg-[#0866E8] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#0B3D91]"
+          >
+            Manage blog
+          </a>
           <StatChip label="Total" value={submissions.length} />
           <StatChip label="With Resume" value={withResume} />
           <StatChip label="Today" value={today} accent />

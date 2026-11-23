@@ -3,6 +3,7 @@ export const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Process', href: '#how-it-works' },
   { label: 'FAQs', href: '#faqs' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -18,6 +19,7 @@ export const footerCompanyLinks = [
   { label: 'About', href: '#about' },
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'FAQs', href: '#faqs' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '#contact' },
   { label: 'Get Started', href: '#start' },
 ];
