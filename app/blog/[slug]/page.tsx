@@ -332,7 +332,7 @@ async function BlogPostContent({
                     fill
                     priority
                     sizes="(min-width: 768px) 768px, 100vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
               )}
